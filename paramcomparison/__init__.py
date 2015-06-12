@@ -30,6 +30,11 @@ class ParamComparison:
         Generate a set of pages
         """
 
+        # make sure writer is valid
+        from .writers import Writer
+        if not isinstance(writer, Writer):
+            raise Exception('Invalid writer. Must be an instance of paramcomparison.writers.Writer')
+
         try:
             os.mkdir(outdir)
         except:
