@@ -143,6 +143,10 @@ C-NAME = 5, d = 8
             self.assertNotEqual(t_index, -1)
             self.assertLess(title_index, t_index)
 
+    def tearDown(self):
+        import shutil
+        shutil.rmtree('tmp', True)
+
 class TestRstWriter(unittest.TestCase):
     """
     Test the class writers.RstWriter
