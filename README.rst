@@ -13,6 +13,11 @@ To install, run:
 
     python setup.py install
 
+Or use pip:
+::
+
+    pip install paramcomparison
+
 Usage
 -----
 The basic usage is simple:
