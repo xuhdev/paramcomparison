@@ -25,7 +25,7 @@ setup(name='ParamComparison',
       long_description=open('README.rst').read(),
       author='Hong Xu',
       author_email='hong@topbug.net',
-      url='paramcomparison.topbug.net',
+      url='http://paramcomp.topbug.net',
       packages=['paramcomparison'],
       license='LICENSE.txt'
      )
