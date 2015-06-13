@@ -129,6 +129,10 @@ class RstWriter(Writer):
             print('', file = table)
         print('', file = table)
 
+        # The first cell shows what are the rows and what are the cols
+        first_cell_line_1 = 'Row: ' + readable_names[names[row_idx]]
+        first_cell_line_2 = 'Col: ' + readable_names[names[col_idx]]
+
         # max widths of each column
         max_widths = [0 for i in range(len(col_values) + 1)]
         # max heights of each row
@@ -136,7 +140,10 @@ class RstWriter(Writer):
 
         # get the max width and column
         max_widths[0] = max(map(len, row_values)) # TODO: incorrect if '\t' is contained
+        max_widths[0] = max(max_widths[0], len(first_cell_line_1), len(first_cell_line_2))
         max_heights[0] = max(map(lambda x : x.count('\n'), col_values))
+        if max_heights[0] < 2: # first cell has 2 lines
+            max_heights[0] = 2
 
         for i in range(1, len(col_values) + 1):
             max_widths[i] = max(map(len, [values[(j, col_values[i - 1])] for j in row_values]))
@@ -153,11 +160,19 @@ class RstWriter(Writer):
             print('', file = table)
             print(' ' * self.indent_size + '|', file = table, end = '')
             if i == 0: # first row is different: only column titles
-                print(' ' * max_widths[0], file = table, end = '|')
+                print(first_cell_line_1, file = table, end = '')
+                print(' ' * (max_widths[0] - len(first_cell_line_1)), file = table, end = '|')
                 for j in range(len(col_values)):
                     print(col_values[j], file = table, end = '')
                     # fill in the rest of space with whitespaces
                     print(' ' * (max_widths[j + 1] - len(col_values[j])), file = table, end = '|')
+                print('', file = table)
+                # line 2
+                print(' ' * self.indent_size + '|', file = table, end = '')
+                print(first_cell_line_2, file = table, end = '')
+                print(' ' * (max_widths[0] - len(first_cell_line_2)), file = table, end = '|')
+                for j in range(1, len(max_widths)): # line 2 only has spaces
+                    print(' ' * max_widths[j], file = table, end = '|')
                 print('', file = table)
                 continue
 
