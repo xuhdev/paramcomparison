@@ -40,7 +40,7 @@ Lesser General Public License for more details.
 You should have received a copy of the GNU Lesser General Public License along with ParamComparison.
 If not, see <http://www.gnu.org/licenses/>.
 
-You can view the full text of the license in COPYING.txt. You can also view GNU General Public
+You can view the full text of the license in LICENSE.txt. You can also view GNU General Public
 License in GPL.txt.
 
 .. _Nikola: http://getnikola.com

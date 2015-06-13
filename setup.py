@@ -25,5 +25,5 @@ setup(name='ParamComparison',
       author_email='hong@topbug.net',
       url='paramcomparison.topbug.net',
       packages=['paramcomparison'],
-      license='COPYING.txt'
+      license='LICENSE.txt'
      )
