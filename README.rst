@@ -16,7 +16,7 @@ To install, run:
 Or use pip:
 ::
 
-    pip install paramcomparison
+    pip install ParamComparison
 
 Usage
 -----
