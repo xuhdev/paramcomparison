@@ -1,7 +1,5 @@
-Documentation of ParamComparison
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-This is the documentation of ParamComparison.
+ParamComparison
+~~~~~~~~~~~~~~~
 
 .. include:: ../README.rst
 
