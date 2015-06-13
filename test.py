@@ -28,7 +28,7 @@ class TestParamComparison(unittest.TestCase):
     """
 
     def setUp(self):
-        self.param_space = {'a': [1,2], 'b': [3,4], 'c':[5,6], 'd': [7,8]}
+        self.param_space = {'a': [1,2], 'b': [3,4], 'c':[5,6], 'd': [7,8,9]}
 
         self.pc = paramcomparison.ParamComparison(self.param_space, f,
                                                   {'a': 'A-NAME', 'c': 'C-NAME'})
@@ -48,7 +48,7 @@ class TestParamComparison(unittest.TestCase):
             (pc.name_idx['a'], pc.name_idx['b'], pc.name_idx['c'], pc.name_idx['d']),
             (pc.names.index('a'), pc.names.index('b'), pc.names.index('c'), pc.names.index('d')))
         self.assertTupleEqual((pc.grid['a'], pc.grid['b'], pc.grid['c'], pc.grid['d']),
-                              (('1', '2'), ('3', '4'), ('5', '6'), ('7', '8')))
+                              (('1', '2'), ('3', '4'), ('5', '6'), ('7', '8', '9')))
 
         # test readable_names
         self.assertDictEqual(pc.readable_names, {'a': 'A-NAME', 'b': 'b', 'c': 'C-NAME', 'd': 'd'})
@@ -60,7 +60,7 @@ class TestParamComparison(unittest.TestCase):
         k[pc.name_idx['c']] = '5'
         k[pc.name_idx['d']] = '8'
         self.assertEqual(pc.results[tuple(k)], '17')
-        self.assertEqual(len(pc.results), 16)
+        self.assertEqual(len(pc.results), 24)
 
     def test_generate_pages(self):
         """
@@ -133,6 +133,17 @@ C-NAME = 5, d = 8
 |1|17|18|
 +-+--+--+
 |2|18|19|
++-+--+--+
+
+C-NAME = 5, d = 9
+~~~~~~~~~~~~~~~~~
+
++-+--+--+
+| |3 |4 |
++-+--+--+
+|1|18|19|
++-+--+--+
+|2|19|20|
 +-+--+--+
 
 
