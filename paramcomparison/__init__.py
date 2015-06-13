@@ -25,16 +25,13 @@ class ParamComparison:
     """
     A class to initiate the generation of pages
 
-    Parameters
-    ----------
-
-    grid : dict -- str -> (val0, val1, ...)
-         A dictionary whose keys are strings of variable names and values are sequences of values to
-         be tried for the corresponding variable.
-    func : function
-         The function to compute the result.
-    readable_names : dict -- str -> str
-         A dictionary which maps names in grid keys to human readable names
+    :type grid: dict: str -> (val0, val1, ...)
+    :param grid: A dictionary whose keys are strings of variable names and values are sequences of
+         values to be tried for the corresponding variable.
+    :type func: function
+    :param func: The function to compute the result.
+    :type readable_names: dict: str -> str
+    :param readable_names: A dictionary which maps names in grid keys to human readable names
     """
 
     def __init__(self, grid, func, readable_names = dict()):
@@ -68,17 +65,14 @@ class ParamComparison:
         """
         Generate a set of pages
 
-        Parameters
-        ----------
-
-        outdir : str
-            The directory to write files to.
-        writer : writers.Writer
-            The writer to be used.
-        row_field : str
-            The field to be used in rows.
-        col_field : str
-            The field to be used in columns.
+        :type outdir: str
+        :param outdir: The directory to write files to.
+        :type writer: writers.Writer
+        :param writer: The writer to be used.
+        :type row_field: str
+        :param row_field: The field to be used in rows.
+        :type col_field: str
+        :param col_field: The field to be used in columns.
         """
 
         # make sure writer is valid

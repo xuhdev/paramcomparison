@@ -1,0 +1,23 @@
+Documentation of ParamComparison
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This is the documentation of ParamComparison.
+
+.. include:: ../README.rst
+
+API Documentation
+=================
+
+.. toctree::
+   :maxdepth: 2
+
+   api/modules
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+

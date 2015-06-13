@@ -18,30 +18,29 @@ from __future__ import print_function
 import abc
 
 class Writer(object):
+    """
+    The base class for all writers, which define how to write output in specific formats.
+    """
 
     @abc.abstractmethod
     def get_file_name(self, name):
         """
-        Parameter
-        ---------
+        :type name: str
+        :param name: Comparison parameter name.
 
-        name : str
-            Comparison parameter name.
-
-        Return the file name given the comparison parameter name
+        :return: the file name given the comparison parameter name
+        :rtype: str
         """
         return
 
     @abc.abstractmethod
     def write_title(self, comparison_param):
         """
-        Parameter
-        ---------
+        :type comparison_param: str
+        :param comparison_param: Comparison parameter name.
 
-        comparison_param : str
-            Comparison parameter name.
-
-        Return the file title given the comparison parameter name
+        :return: the file title given the comparison parameter name
+        :rtype: str
         """
         return
 
@@ -49,29 +48,27 @@ class Writer(object):
     def write_table(self, names, params, row_idx, row_values, col_idx, col_values,
                     values, readable_names):
         """
-        Parameters
-        ----------
+        :type names: sequence of strings
+        :param names: A sequence of names of fields.
+        :type params: sequence of strings
+        :param params: A sequence of parameters corresponding to the variable name in the same
+             position of names.
+        :type row_idx: int
+        :param row_idx: The index of the row field.
+        :type row_values: sequence of strings
+        :param row_values: A sequence of all possible values of the row fields.
+        :type col_idx: int
+        :param col_idx: The index of the column field.
+        :type col_values: sequence of strings
+        :param col_values: A sequence of all possible values of the column fields.
+        :type values: dict: (str, str) -> str
+        :param values: A dictionary whose key is an element of the Cartesion product of row_values
+             and col_values, and value is the corresponding result in the table entry.
+        :type readable_names: dict: str -> str
+        :param readable_names: A dictionary which maps names to to human readable names
 
-        names : sequence of strings
-             A sequence of names of fields.
-        params : sequence of strings
-             A sequence of parameters corresponding to the variable name in the same position of
-             names.
-        row_idx : int
-             The index of the row field.
-        row_values : sequence of strings
-             A sequence of all possible values of the row fields.
-        col_idx : int
-             The index of the column field.
-        col_values : sequence of strings
-             A sequence of all possible values of the column fields.
-        values : dict -- (str, str) -> str
-             A dictionary whose key is an element of the Cartesion product of row_values and
-             col_values, and value is the corresponding result in the table entry.
-        readable_names : dict -- str -> str
-             A dictionary which maps names to to human readable names
-
-        Return the table string
+        :return: the table string
+        :rtype: str
         """
 
         return
@@ -79,7 +76,8 @@ class Writer(object):
     @abc.abstractmethod
     def write_separator(self):
         """
-        Return the separator between two sets of tables.
+        :return: the separator between two sets of tables.
+        :rtype: str
         """
         return
 
@@ -90,25 +88,35 @@ except:
     from io import StringIO
 
 class RstWriter(Writer):
+    """
+    A class to write RST output.
+    """
 
     def __init__(self, indent_size = 4):
         """
-        Parameters
-        ----------
-
-        indent_size : positive int
-            The size of indent used in the rst output
+        :type indent_size: int
+        :param indent_size: The size of indent used in the rst output. Must be greater than 0.
         """
         self.indent_size = indent_size
 
     def get_file_name(self, name):
+        """
+        See :func:`Writer.get_file_name`.
+        """
         return '{}.rst'.format(name)
 
     def write_title(self, comparison_param):
+        """
+        See :func:`Writer.write_title`.
+        """
         return comparison_param + os.linesep + '=' * len(comparison_param) + os.linesep
 
     def write_table(self, names, params, row_idx, row_values, col_idx, col_values,
                     values, readable_names):
+        """
+        See :func:`Writer.write_table`.
+        """
+
         table = StringIO(os.linesep)
 
         # table title
@@ -199,4 +207,8 @@ class RstWriter(Writer):
         return ret
 
     def write_separator(self):
+        """
+        See :func:`Writer.write_separator`.
+        """
+
         return os.linesep + '----' + os.linesep + os.linesep
