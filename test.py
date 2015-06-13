@@ -183,10 +183,58 @@ main
             self.assertNotEqual(t_index, -1)
             self.assertLess(title_index, t_index)
 
+    def test_generate_pages_3_params(self):
+        """
+        Test generate_pages when there are 3 parameters
+        """
+
+        pc = paramcomparison.ParamComparison(
+            {'a': ('a1', 'a2'), 'b': ('b1', 'b2'), 'c': ('c1', 'c2')},
+            lambda a, b, c: a + b + c, {'a': 'A-NAME',})
+        pc.generate_pages('tmp3', RstWriter(), 'a', 'b')
+
+        with open('tmp3/c.rst', 'r') as f:
+            c = f.read()
+            title_index = c.find('''
+c
+=
+            '''.strip())
+            t_index = c.find('''
+c = c1
+~~~~~~
+
++--+------+------+
+|  |b1    |b2    |
++--+------+------+
+|a1|a1b1c1|a1b2c1|
++--+------+------+
+|a2|a2b1c1|a2b2c1|
++--+------+------+
+
+c = c2
+~~~~~~
+
++--+------+------+
+|  |b1    |b2    |
++--+------+------+
+|a1|a1b1c2|a1b2c2|
++--+------+------+
+|a2|a2b1c2|a2b2c2|
++--+------+------+
+
+
+----
+            '''.strip())
+
+            self.assertNotEqual(title_index, -1)
+            self.assertNotEqual(t_index, -1)
+            self.assertLess(title_index, t_index)
+
     def tearDown(self):
         import shutil
         shutil.rmtree('tmp', True)
         shutil.rmtree('tmp2', True)
+        shutil.rmtree('tmp3', True)
 
 class TestRstWriter(unittest.TestCase):
     """
