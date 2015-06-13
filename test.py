@@ -143,9 +143,39 @@ C-NAME = 5, d = 8
             self.assertNotEqual(t_index, -1)
             self.assertLess(title_index, t_index)
 
+    def test_generate_pages_2_params(self):
+        """
+        Test generate_pages when there are only2 parameters
+        """
+
+        pc = paramcomparison.ParamComparison({'a': ('a1', 'a2'), 'b': ('b1', 'b2')},
+                                             lambda a, b: a + b, {'a': 'A-NAME',})
+        pc.generate_pages('tmp2', RstWriter(), 'a', 'b')
+
+        with open('tmp2/main.rst', 'r') as f:
+            m = f.read()
+            title_index = m.find('''
+main
+====
+            '''.strip())
+            t_index = m.find('''
++--+----+----+
+|  |b1  |b2  |
++--+----+----+
+|a1|a1b1|a1b2|
++--+----+----+
+|a2|a2b1|a2b2|
++--+----+----+
+            '''.strip())
+
+            self.assertNotEqual(title_index, -1)
+            self.assertNotEqual(t_index, -1)
+            self.assertLess(title_index, t_index)
+
     def tearDown(self):
         import shutil
         shutil.rmtree('tmp', True)
+        shutil.rmtree('tmp2', True)
 
 class TestRstWriter(unittest.TestCase):
     """

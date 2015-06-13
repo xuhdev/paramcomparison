@@ -116,7 +116,7 @@ class ParamComparison:
                 f.write(writer.write_table(self.names, (None, None),
                                            row_field_idx, self.grid[row_field],
                                            col_field_idx, self.grid[col_field], values,
-                                           readable_names))
+                                           self.readable_names))
             return
 
         # i is the 3rd field
