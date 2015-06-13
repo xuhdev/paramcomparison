@@ -5,6 +5,14 @@ ParamComparison is a Python package which can generate a series of tables to dis
 different parameter combinations. It is useful when trying different parameters to see how good the
 results are.
 
+Install
+-------
+
+To install, run:
+::
+
+    python setup.py install
+
 Usage
 -----
 The basic usage is simple:
