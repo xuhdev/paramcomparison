@@ -17,8 +17,10 @@
 
 from distutils.core import setup
 
+import paramcomparison
+
 setup(name='ParamComparison',
-      version='0.1',
+      version=paramcomparison.__version__,
       description='Parameter Comparison Table Generator',
       long_description=open('README.rst').read(),
       author='Hong Xu',
