@@ -90,8 +90,16 @@ except:
     from io import StringIO
 
 class RstWriter(Writer):
-    def __init__(self):
-        pass
+
+    def __init__(self, indent_size = 4):
+        """
+        Parameters
+        ----------
+
+        indent_size : positive int
+            The size of indent used in the rst output
+        """
+        self.indent_size = indent_size
 
     def get_file_name(self, name):
         return '{}.rst'.format(name)
@@ -104,7 +112,9 @@ class RstWriter(Writer):
         table = StringIO(os.linesep)
 
         # table title
+        print ('.. table::', file = table, end = '')
         if len(names) > 2:
+            print (' ', file = table, end = '') # need an extra space
             table_title_list = []
             for i in range(len(names)):
                 if i == row_idx or i == col_idx:
@@ -115,8 +125,9 @@ class RstWriter(Writer):
 
             table_title_list.sort()
             print(', '.join(table_title_list), file = table)
-            print('~' * (len(table.getvalue()) - 1), file = table)
+        else:
             print('', file = table)
+        print('', file = table)
 
         # max widths of each column
         max_widths = [0 for i in range(len(col_values) + 1)]
@@ -136,11 +147,11 @@ class RstWriter(Writer):
 
         # start writing the table
         for i in range(len(row_values) + 1):
-            print('+', file = table, end = '')
+            print(' ' * self.indent_size + '+', file = table, end = '')
             for j in max_widths:
                 print('-' * j, file = table, end = '+')
             print('', file = table)
-            print('|', file = table, end = '')
+            print(' ' * self.indent_size + '|', file = table, end = '')
             if i == 0: # first row is different: only column titles
                 print(' ' * max_widths[0], file = table, end = '|')
                 for j in range(len(col_values)):
@@ -162,7 +173,7 @@ class RstWriter(Writer):
                 print(' ' * (max_widths[j + 1] - len(v)), file = table, end = '|')
             print('', file = table)
 
-        print('+', file = table, end = '')
+        print(' ' * self.indent_size + '+', file = table, end = '')
         for j in max_widths:
             print('-' * j, file = table, end = '+')
         print('', file = table)
