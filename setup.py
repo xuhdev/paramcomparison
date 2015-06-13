@@ -27,5 +27,5 @@ setup(name='ParamComparison',
       author_email='hong@topbug.net',
       url='http://paramcomp.topbug.net',
       packages=['paramcomparison'],
-      license='LICENSE.txt'
+      license='LGPLv3+'
      )
