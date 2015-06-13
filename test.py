@@ -15,7 +15,8 @@ class TestParamComparison(unittest.TestCase):
     def setUp(self):
         self.param_space = {'a': [1,2], 'b': [3,4], 'c':[5,6], 'd': [7,8]}
 
-        self.pc = paramcomparison.ParamComparison(self.param_space, f)
+        self.pc = paramcomparison.ParamComparison(self.param_space, f,
+                                                  {'a': 'A-NAME', 'c': 'C-NAME'})
     def test_init(self):
         """
         Test initialization
@@ -33,6 +34,9 @@ class TestParamComparison(unittest.TestCase):
             (pc.names.index('a'), pc.names.index('b'), pc.names.index('c'), pc.names.index('d')))
         self.assertTupleEqual((pc.grid['a'], pc.grid['b'], pc.grid['c'], pc.grid['d']),
                               (('1', '2'), ('3', '4'), ('5', '6'), ('7', '8')))
+
+        # test readable_names
+        self.assertDictEqual(pc.readable_names, {'a': 'A-NAME', 'b': 'b', 'c': 'C-NAME', 'd': 'd'})
 
         # test the results dict
         k = [None, None, None, None]
@@ -54,11 +58,11 @@ class TestParamComparison(unittest.TestCase):
             c = f.read()
 
             # title string
-            title_index = c.find('c' + os.linesep + '=')
+            title_index = c.find('C-NAME' + os.linesep + '=')
             # table string
             t_index = c.find('''
-c = 5,d = 7
-~~~~~~~~~~~
+C-NAME = 5, d = 7
+~~~~~~~~~~~~~~~~~
 
 +-+--+--+
 | |3 |4 |
@@ -68,8 +72,8 @@ c = 5,d = 7
 |2|17|18|
 +-+--+--+
 
-c = 6,d = 7
-~~~~~~~~~~~
+C-NAME = 6, d = 7
+~~~~~~~~~~~~~~~~~
 
 +-+--+--+
 | |3 |4 |
@@ -94,8 +98,8 @@ c = 6,d = 7
             title_index = d.find('d' + os.linesep + '=')
             # table string
             t_index = d.find('''
-c = 5,d = 7
-~~~~~~~~~~~
+C-NAME = 5, d = 7
+~~~~~~~~~~~~~~~~~
 
 +-+--+--+
 | |3 |4 |
@@ -105,8 +109,8 @@ c = 5,d = 7
 |2|17|18|
 +-+--+--+
 
-c = 5,d = 8
-~~~~~~~~~~~
+C-NAME = 5, d = 8
+~~~~~~~~~~~~~~~~~
 
 +-+--+--+
 | |3 |4 |
@@ -163,8 +167,11 @@ class TestRstWriter(unittest.TestCase):
                                    {('a1', 'b1'): 'a1b1',
                                     ('a1', 'b2'): 'a1b2',
                                     ('a2', 'b1'): 'a2b1',
-                                    ('a2', 'b2'): 'a2b2'})
-        self.assertNotEqual(table.find('c = c_value'), -1)
+                                    ('a2', 'b2'): 'a2b2'},
+                                   {'a': 'A',
+                                    'b': 'B',
+                                    'c': 'C-NAME'})
+        self.assertNotEqual(table.find('C-NAME = c_value'), -1)
         self.assertNotEqual(table.find('''
 +--+----+----+
 |  |b1  |b2  |

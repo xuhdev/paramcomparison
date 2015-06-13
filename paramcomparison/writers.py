@@ -31,7 +31,8 @@ class Writer(object):
         return
 
     @abc.abstractmethod
-    def write_table(self, names, params, row_idx, row_values, col_idx, col_values, values):
+    def write_table(self, names, params, row_idx, row_values, col_idx, col_values,
+                    values, readable_names):
         """
         Parameters
         ----------
@@ -49,9 +50,11 @@ class Writer(object):
              The index of the column field.
         col_values : sequence of strings
              A sequence of all possible values of the column fields.
-        values : dict -- key : (str, str), value : str
+        values : dict -- (str, str) -> str
              A dictionary whose key is an element of the Cartesion product of row_values and
              col_values, and value is the corresponding result in the table entry.
+        readable_names : dict -- str -> str
+             A dictionary which maps names to to human readable names
 
         Return the table string
         """
@@ -81,7 +84,8 @@ class RstWriter(Writer):
     def write_title(self, comparison_param):
         return comparison_param + os.linesep + '=' * len(comparison_param) + os.linesep
 
-    def write_table(self, names, params, row_idx, row_values, col_idx, col_values, values):
+    def write_table(self, names, params, row_idx, row_values, col_idx, col_values,
+                    values, readable_names):
         table = StringIO(os.linesep)
 
         # table title
@@ -92,10 +96,10 @@ class RstWriter(Writer):
                     continue
                 if i == len(names) - 1:
                     sep = ''
-                table_title_list.append('{} = {}'.format(names[i], params[i]))
+                table_title_list.append('{} = {}'.format(readable_names[names[i]], params[i]))
 
             table_title_list.sort()
-            print(','.join(table_title_list), file = table)
+            print(', '.join(table_title_list), file = table)
             print('~' * (len(table.getvalue()) - 1), file = table)
             print('', file = table)
 
