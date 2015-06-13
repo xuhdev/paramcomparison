@@ -5,19 +5,64 @@ import abc
 class Writer(object):
 
     @abc.abstractmethod
-    def get_file_name(self):
+    def get_file_name(self, name):
+        """
+        Parameter
+        ---------
+
+        name : str
+            Comparison parameter name.
+
+        Return the file name given the comparison parameter name
+        """
         return
 
     @abc.abstractmethod
     def write_title(self, comparison_param):
+        """
+        Parameter
+        ---------
+
+        comparison_param : str
+            Comparison parameter name.
+
+        Return the file title given the comparison parameter name
+        """
         return
 
     @abc.abstractmethod
     def write_table(self, names, params, row_idx, row_values, col_idx, col_values, values):
+        """
+        Parameters
+        ----------
+
+        names : sequence of strings
+             A sequence of names of fields.
+        params : sequence of strings
+             A sequence of parameters corresponding to the variable name in the same position of
+             names.
+        row_idx : int
+             The index of the row field.
+        row_values : sequence of strings
+             A sequence of all possible values of the row fields.
+        col_idx : int
+             The index of the column field.
+        col_values : sequence of strings
+             A sequence of all possible values of the column fields.
+        values : dict -- key : (str, str), value : str
+             A dictionary whose key is an element of the Cartesion product of row_values and
+             col_values, and value is the corresponding result in the table entry.
+
+        Return the table string
+        """
+
         return
 
     @abc.abstractmethod
     def write_separator(self):
+        """
+        Return the separator between two sets of tables.
+        """
         return
 
 import os

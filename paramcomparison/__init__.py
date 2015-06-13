@@ -5,8 +5,21 @@ import os
 import sys
 
 class ParamComparison:
+    """
+    A class to initiate the generation of pages
+
+    Parameters
+    ----------
+
+    grid : dict
+         A dictionary whose keys are strings of variable names and values are sequences of values to
+         be tried for the corresponding variable.
+    func : function
+         The function to compute the result.
+    """
 
     def __init__(self, grid, func):
+
         self.names = tuple(grid.keys())
         self.name_idx = dict() # reverse look up (name --> index)
         for i in range(0, len(self.names)):
@@ -28,6 +41,18 @@ class ParamComparison:
     def generate_pages(self, outdir, writer, row_field, col_field):
         """
         Generate a set of pages
+
+        Parameters
+        ----------
+
+        outdir : str
+            The directory to write files to.
+        writer : writers.Writer
+            The writer to be used.
+        row_field : str
+            The field to be used in rows.
+        col_field : str
+            The field to be used in columns.
         """
 
         # make sure writer is valid
