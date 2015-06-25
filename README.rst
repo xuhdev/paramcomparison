@@ -35,7 +35,7 @@ The basic usage is simple:
     pc.generate_pages('output', RstWriter(), 'a', 'b')
 
 The directory output will contain some rst files which contains generated tables. You can use
-`Sphinx`_, `Nikola`_ or other tools to further convert them into HTML, PDF or other format.
+`Sphinx`_, `Nikola`_ or other tools to further convert them into HTML, PDF and other formats.
 
 Source Code
 -----------
