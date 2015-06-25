@@ -66,7 +66,7 @@ You should have received a copy of the GNU Lesser General Public License along w
 If not, see <http://www.gnu.org/licenses/>.
 
 You can view the full text of the license in LICENSE.txt. You can also view GNU General Public
-License in GPL.txt.
+License version 3 in GPL.txt.
 
 .. _Nikola: http://getnikola.com
 .. _Sphinx: http://sphinx-doc.org/
