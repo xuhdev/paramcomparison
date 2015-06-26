@@ -1,1 +1,1 @@
-include GPL.txt LICENSE.txt README.rst
+include GPL.txt LICENSE.txt README.rst test.py
