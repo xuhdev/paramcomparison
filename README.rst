@@ -40,14 +40,14 @@ The directory output will contain some rst files which contains generated tables
 Source Code
 -----------
 
-The source code is available on `GitHub <https://github.com/xuhdev/paramcomparison>`_.
+The source code is available on `GitHub <https://github.com/xuhdev/paramcomparison>`__.
 
 Bug Report and Contribution
 ---------------------------
 
 Please submit bug reports to the `issue tracker
 <https://github.com/xuhdev/paramcomparison/issues>`_. To contribute, please make a pull request on
-`GitHub <https://github.com/xuhdev/paramcomparison/pulls>`_.
+`GitHub <https://github.com/xuhdev/paramcomparison/pulls>`__.
 
 License
 -------
