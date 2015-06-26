@@ -34,6 +34,11 @@ class ParamComparison:
 
     def __init__(self, grid, reader):
 
+        # assure reader is valid
+        from .readers import Reader
+        if not isinstance(reader, Reader):
+            raise Exception('Invalid reader. Must be an instance of paramcomparison.writers.Reader')
+
         self.names = tuple(grid.keys())
         self.name_idx = dict() # reverse look up (name --> index)
         for i in range(0, len(self.names)):
