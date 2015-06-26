@@ -43,8 +43,8 @@ class UserFunctionReader(Reader):
     def __init__(self, func, data):
         """
         :type func: function
-        :param func: A user function which takes two parameters: data and params. The function is
-        defined by user and will be called in read().
+        :param func: A user function which takes two parameters: ``data`` and ``params``. The
+        function is defined by user and will be called in :func:`read`.
         """
         self.func = func
         self.data = data
@@ -54,7 +54,7 @@ class UserFunctionReader(Reader):
         This function calls the user function. When calling the function, the first parameter is
         params, and the second parameter of the data variable passed in in :func:`__init__`.
 
-        :return: what the func returns.
+        :return: what ``func`` returns.
 
         .. seealso:: :func:`Reader.read`.
         """
