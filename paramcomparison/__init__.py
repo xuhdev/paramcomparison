@@ -37,7 +37,7 @@ class ParamComparison:
         # assure reader is valid
         from .readers import Reader
         if not isinstance(reader, Reader):
-            raise Exception('Invalid reader. Must be an instance of paramcomparison.writers.Reader')
+            raise TypeError('Invalid reader. Must be an instance of paramcomparison.writers.Reader')
 
         self.names = tuple(grid.keys())
         self.name_idx = dict() # reverse look up (name --> index)
@@ -74,7 +74,7 @@ class ParamComparison:
         # make sure writer is valid
         from .writers import Writer
         if not isinstance(writer, Writer):
-            raise Exception('Invalid writer. Must be an instance of paramcomparison.writers.Writer')
+            raise TypeError('Invalid writer. Must be an instance of paramcomparison.writers.Writer')
 
         try:
             os.mkdir(outdir)
@@ -91,9 +91,9 @@ class ParamComparison:
 
         # make sure both row_field and col_field exist
         if row_field_idx == -1:
-            raise Exception('Field "{}" does not exist'.format(row_field))
+            raise ValueError('Field "{}" does not exist'.format(row_field))
         if col_field_idx == -1:
-            raise Exception('Field "{}" does not exist'.format(col_field))
+            raise ValueError('Field "{}" does not exist'.format(col_field))
 
         if len(self.names) == 2: # we only have 2 fields, just generate a table
             values = dict()
