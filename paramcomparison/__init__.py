@@ -30,6 +30,7 @@ class ParamComparison:
          values to be tried for the corresponding variable.
     :type reader: A :class:`readers.Reader` (or its subclass) object.
     :param reader: The Reader class to load and process data.
+    :raise TypeError: When ``reader`` is not an instance of :class:`readers.Reader`.
     """
 
     def __init__(self, grid, reader):
@@ -69,6 +70,8 @@ class ParamComparison:
         :param row_field: The field to be used in rows.
         :type col_field: str
         :param col_field: The field to be used in columns.
+        :return: None
+        :raise TypeError: When ``writer`` is not an instance of :class:`writers.Writer`.
         """
 
         # make sure writer is valid

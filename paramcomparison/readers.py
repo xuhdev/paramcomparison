@@ -54,7 +54,7 @@ class UserFunctionReader(Reader):
         This function calls the user function. When calling the function, the first parameter is
         params, and the second parameter of the data variable passed in in :func:`__init__`.
 
-        :return: what ``func`` returns.
+        :return: What ``func`` returns.
 
         .. seealso:: :func:`Reader.read`.
         """

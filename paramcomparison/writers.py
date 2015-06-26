@@ -30,7 +30,7 @@ class Writer(object):
         :type name: str
         :param name: Comparison parameter name.
 
-        :return: the file name given the comparison parameter name
+        :return: The file name given the comparison parameter name
         :rtype: str
         """
         pass
@@ -41,7 +41,7 @@ class Writer(object):
         :type comparison_param: str
         :param comparison_param: Comparison parameter name.
 
-        :return: the file title given the comparison parameter name
+        :return: The file title given the comparison parameter name
         :rtype: str
         """
         pass
@@ -67,7 +67,7 @@ class Writer(object):
         :param values: A dictionary whose key is an element of the Cartesion product of row_values
              and col_values, and value is the corresponding result in the table entry.
 
-        :return: the table string
+        :return: The table string
         :rtype: str
         """
 
@@ -76,7 +76,7 @@ class Writer(object):
     @abc.abstractmethod
     def write_separator(self):
         """
-        :return: the separator between two sets of tables.
+        :return: The separator between two sets of tables.
         :rtype: str
         """
         pass
