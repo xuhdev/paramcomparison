@@ -289,6 +289,25 @@ class TestRstWriter(unittest.TestCase):
     +------+----+----+
         '''.strip()), -1)
 
+        # Test empty entry case
+        table = self.w.write_table(('a', 'b', 'c'), (None, None, 'c_value'),
+                                   0, ('a1', 'a2'), 1, ('b1', 'b2'),
+                                   {('a1', 'b1'): '',
+                                    ('a1', 'b2'): 'a1b2',
+                                    ('a2', 'b1'): '',
+                                    ('a2', 'b2'): 'a2b2'})
+        self.assertNotEqual(table.find('.. table:: c = c_value'), -1)
+        self.assertNotEqual(table.find('''
+    +------+--+----+
+    |Row: a|b1|b2  |
+    |Col: b|  |    |
+    +------+--+----+
+    |a1    |  |a1b2|
+    +------+--+----+
+    |a2    |  |a2b2|
+    +------+--+----+
+        '''.strip()), -1)
+
 
     def test_write_separator(self):
         """

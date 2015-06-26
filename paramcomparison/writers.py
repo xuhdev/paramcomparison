@@ -155,6 +155,7 @@ class RstWriter(Writer):
 
         for i in range(1, len(col_values) + 1):
             max_widths[i] = max(map(len, [values[(j, col_values[i - 1])] for j in row_values]))
+            max_widths[i] = max(max_widths[i], len(col_values[i - 1]))
 
         for i in range(1, len(row_values) + 1):
             max_heights[i] = max(map(lambda x : x.count('\n'),
