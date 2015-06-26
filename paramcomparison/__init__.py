@@ -28,7 +28,7 @@ class ParamComparison:
     :type grid: dict: str -> (val0, val1, ...)
     :param grid: A dictionary whose keys are strings of variable names and values are sequences of
          values to be tried for the corresponding variable.
-    :type reader: A :class:`readers.Reader` (or its subclass) object.
+    :type reader: :class:`readers.Reader` (or its subclass) object
     :param reader: The Reader class to load and process data.
     :raise TypeError: When ``reader`` is not an instance of :class:`readers.Reader`.
     """
@@ -64,7 +64,7 @@ class ParamComparison:
 
         :type outdir: str
         :param outdir: The directory to write files to.
-        :type writer: A :class:`writers.Writer` (or its subclass) object.
+        :type writer: :class:`writers.Writer` (or its subclass) object
         :param writer: The writer to be used.
         :type row_field: str
         :param row_field: The field to be used in rows.
