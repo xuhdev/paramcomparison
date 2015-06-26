@@ -53,7 +53,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'ParamComparison'
-copyright = '2015, Hong Xu <hong@topbug.net>'
+copyright = '2015, Hong Xu &lt;hong@topbug.net&gt;'
 author = 'Hong Xu <hong@topbug.net>'
 
 # The version info for the project you're documenting, acts as replacement for
