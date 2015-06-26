@@ -18,9 +18,10 @@ import os
 
 import paramcomparison
 from paramcomparison.writers import RstWriter
+from paramcomparison.readers import UserFunctionReader
 
-def f(a, b, c, d):
-    return a + b + c + d
+def f(params, data):
+    return params['a'] + params['b'] + params['c'] + params['d']
 
 class TestParamComparison(unittest.TestCase):
     """
@@ -30,7 +31,7 @@ class TestParamComparison(unittest.TestCase):
     def setUp(self):
         self.param_space = {'a': [1,2], 'b': [3,4], 'c':[5,6], 'd': [7,8,9]}
 
-        self.pc = paramcomparison.ParamComparison(self.param_space, f,
+        self.pc = paramcomparison.ParamComparison(self.param_space, UserFunctionReader(f, None),
                                                   {'a': 'A-NAME', 'c': 'C-NAME'})
     def test_init(self):
         """
@@ -160,7 +161,8 @@ class TestParamComparison(unittest.TestCase):
         """
 
         pc = paramcomparison.ParamComparison({'a': ('a1', 'a2'), 'b': ('b1', 'b2')},
-                                             lambda a, b: a + b, {'a': 'A-NAME',})
+                        UserFunctionReader(lambda params, data: params['a'] + params['b'], None),
+                        {'a': 'A-NAME',})
         pc.generate_pages('tmp2', RstWriter(), 'a', 'b')
 
         with open('tmp2/main.rst', 'r') as f:
@@ -193,7 +195,8 @@ main
 
         pc = paramcomparison.ParamComparison(
             {'a': ('a1', 'a2'), 'b': ('b1', 'b2'), 'c': ('c1', 'c2')},
-            lambda a, b, c: a + b + c, {'a': 'A-NAME',})
+            UserFunctionReader(lambda params, data: params['a'] + params['b'] + params['c'], None),
+            {'a': 'A-NAME',})
         pc.generate_pages('tmp3', RstWriter(), 'a', 'b')
 
         with open('tmp3/c.rst', 'r') as f:

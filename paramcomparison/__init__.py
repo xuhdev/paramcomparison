@@ -28,13 +28,13 @@ class ParamComparison:
     :type grid: dict: str -> (val0, val1, ...)
     :param grid: A dictionary whose keys are strings of variable names and values are sequences of
          values to be tried for the corresponding variable.
-    :type func: function
-    :param func: The function to compute the result.
+    :type reader: readers.Reader
+    :param reader: The Reader class to load and process data.
     :type readable_names: dict: str -> str
     :param readable_names: A dictionary which maps names in grid keys to human readable names
     """
 
-    def __init__(self, grid, func, readable_names = dict()):
+    def __init__(self, grid, reader, readable_names = dict()):
 
         self.names = tuple(grid.keys())
         self.name_idx = dict() # reverse look up (name --> index)
@@ -57,7 +57,7 @@ class ParamComparison:
         # store all results to a dictionary to be used for further looking up
         for params in itertools.product(*grid.values()):
             func_params = dict(zip(self.names, params))
-            result = str(func(**func_params))
+            result = str(reader.read(func_params))
             values = tuple(map(str, params))
             self.results[values] = result
 
