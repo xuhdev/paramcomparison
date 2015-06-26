@@ -48,7 +48,7 @@ class Writer(object):
 
     @abc.abstractmethod
     def write_table(self, names, params, row_idx, row_values, col_idx, col_values,
-                    values, readable_names):
+                    values):
         """
         :type names: sequence of strings
         :param names: A sequence of names of fields.
@@ -66,8 +66,6 @@ class Writer(object):
         :type values: dict: (str, str) -> str
         :param values: A dictionary whose key is an element of the Cartesion product of row_values
              and col_values, and value is the corresponding result in the table entry.
-        :type readable_names: dict: str -> str
-        :param readable_names: A dictionary which maps names to to human readable names
 
         :return: the table string
         :rtype: str
@@ -114,7 +112,7 @@ class RstWriter(Writer):
         return comparison_param + os.linesep + '=' * len(comparison_param) + os.linesep
 
     def write_table(self, names, params, row_idx, row_values, col_idx, col_values,
-                    values, readable_names):
+                    values):
         """
         See :func:`Writer.write_table`.
         """
@@ -131,7 +129,7 @@ class RstWriter(Writer):
                     continue
                 if i == len(names) - 1:
                     sep = ''
-                table_title_list.append('{} = {}'.format(readable_names[names[i]], params[i]))
+                table_title_list.append('{} = {}'.format(names[i], params[i]))
 
             table_title_list.sort()
             print(', '.join(table_title_list), file = table)
@@ -140,8 +138,8 @@ class RstWriter(Writer):
         print('', file = table)
 
         # The first cell shows what are the rows and what are the cols
-        first_cell_line_1 = 'Row: ' + readable_names[names[row_idx]]
-        first_cell_line_2 = 'Col: ' + readable_names[names[col_idx]]
+        first_cell_line_1 = 'Row: ' + names[row_idx]
+        first_cell_line_2 = 'Col: ' + names[col_idx]
 
         # max widths of each column
         max_widths = [0 for i in range(len(col_values) + 1)]

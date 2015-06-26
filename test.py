@@ -31,8 +31,8 @@ class TestParamComparison(unittest.TestCase):
     def setUp(self):
         self.param_space = {'a': [1,2], 'b': [3,4], 'c':[5,6], 'd': [7,8,9]}
 
-        self.pc = paramcomparison.ParamComparison(self.param_space, UserFunctionReader(f, None),
-                                                  {'a': 'A-NAME', 'c': 'C-NAME'})
+        self.pc = paramcomparison.ParamComparison(self.param_space, UserFunctionReader(f, None))
+
     def test_init(self):
         """
         Test initialization
@@ -50,9 +50,6 @@ class TestParamComparison(unittest.TestCase):
             (pc.names.index('a'), pc.names.index('b'), pc.names.index('c'), pc.names.index('d')))
         self.assertTupleEqual((pc.grid['a'], pc.grid['b'], pc.grid['c'], pc.grid['d']),
                               (('1', '2'), ('3', '4'), ('5', '6'), ('7', '8', '9')))
-
-        # test readable_names
-        self.assertDictEqual(pc.readable_names, {'a': 'A-NAME', 'b': 'b', 'c': 'C-NAME', 'd': 'd'})
 
         # test the results dict
         k = [None, None, None, None]
@@ -74,30 +71,30 @@ class TestParamComparison(unittest.TestCase):
             c = f.read()
 
             # title string
-            title_index = c.find('C-NAME' + os.linesep + '=')
+            title_index = c.find('c' + os.linesep + '=')
             # table string
             t_index = c.find('''
-.. table:: C-NAME = 5, d = 7
+.. table:: c = 5, d = 7
 
-    +-----------+--+--+
-    |Row: A-NAME|3 |4 |
-    |Col: b     |  |  |
-    +-----------+--+--+
-    |1          |16|17|
-    +-----------+--+--+
-    |2          |17|18|
-    +-----------+--+--+
+    +------+--+--+
+    |Row: a|3 |4 |
+    |Col: b|  |  |
+    +------+--+--+
+    |1     |16|17|
+    +------+--+--+
+    |2     |17|18|
+    +------+--+--+
 
-.. table:: C-NAME = 6, d = 7
+.. table:: c = 6, d = 7
 
-    +-----------+--+--+
-    |Row: A-NAME|3 |4 |
-    |Col: b     |  |  |
-    +-----------+--+--+
-    |1          |17|18|
-    +-----------+--+--+
-    |2          |18|19|
-    +-----------+--+--+
+    +------+--+--+
+    |Row: a|3 |4 |
+    |Col: b|  |  |
+    +------+--+--+
+    |1     |17|18|
+    +------+--+--+
+    |2     |18|19|
+    +------+--+--+
 
 
 ----
@@ -114,38 +111,38 @@ class TestParamComparison(unittest.TestCase):
             title_index = d.find('d' + os.linesep + '=')
             # table string
             t_index = d.find('''
-.. table:: C-NAME = 5, d = 7
+.. table:: c = 5, d = 7
 
-    +-----------+--+--+
-    |Row: A-NAME|3 |4 |
-    |Col: b     |  |  |
-    +-----------+--+--+
-    |1          |16|17|
-    +-----------+--+--+
-    |2          |17|18|
-    +-----------+--+--+
+    +------+--+--+
+    |Row: a|3 |4 |
+    |Col: b|  |  |
+    +------+--+--+
+    |1     |16|17|
+    +------+--+--+
+    |2     |17|18|
+    +------+--+--+
 
-.. table:: C-NAME = 5, d = 8
+.. table:: c = 5, d = 8
 
-    +-----------+--+--+
-    |Row: A-NAME|3 |4 |
-    |Col: b     |  |  |
-    +-----------+--+--+
-    |1          |17|18|
-    +-----------+--+--+
-    |2          |18|19|
-    +-----------+--+--+
+    +------+--+--+
+    |Row: a|3 |4 |
+    |Col: b|  |  |
+    +------+--+--+
+    |1     |17|18|
+    +------+--+--+
+    |2     |18|19|
+    +------+--+--+
 
-.. table:: C-NAME = 5, d = 9
+.. table:: c = 5, d = 9
 
-    +-----------+--+--+
-    |Row: A-NAME|3 |4 |
-    |Col: b     |  |  |
-    +-----------+--+--+
-    |1          |18|19|
-    +-----------+--+--+
-    |2          |19|20|
-    +-----------+--+--+
+    +------+--+--+
+    |Row: a|3 |4 |
+    |Col: b|  |  |
+    +------+--+--+
+    |1     |18|19|
+    +------+--+--+
+    |2     |19|20|
+    +------+--+--+
 
 
 ----
@@ -161,8 +158,7 @@ class TestParamComparison(unittest.TestCase):
         """
 
         pc = paramcomparison.ParamComparison({'a': ('a1', 'a2'), 'b': ('b1', 'b2')},
-                        UserFunctionReader(lambda params, data: params['a'] + params['b'], None),
-                        {'a': 'A-NAME',})
+                        UserFunctionReader(lambda params, data: params['a'] + params['b'], None))
         pc.generate_pages('tmp2', RstWriter(), 'a', 'b')
 
         with open('tmp2/main.rst', 'r') as f:
@@ -174,14 +170,14 @@ main
             t_index = m.find('''
 .. table::
 
-    +-----------+----+----+
-    |Row: A-NAME|b1  |b2  |
-    |Col: b     |    |    |
-    +-----------+----+----+
-    |a1         |a1b1|a1b2|
-    +-----------+----+----+
-    |a2         |a2b1|a2b2|
-    +-----------+----+----+
+    +------+----+----+
+    |Row: a|b1  |b2  |
+    |Col: b|    |    |
+    +------+----+----+
+    |a1    |a1b1|a1b2|
+    +------+----+----+
+    |a2    |a2b1|a2b2|
+    +------+----+----+
             '''.strip())
 
             self.assertNotEqual(title_index, -1)
@@ -195,8 +191,7 @@ main
 
         pc = paramcomparison.ParamComparison(
             {'a': ('a1', 'a2'), 'b': ('b1', 'b2'), 'c': ('c1', 'c2')},
-            UserFunctionReader(lambda params, data: params['a'] + params['b'] + params['c'], None),
-            {'a': 'A-NAME',})
+            UserFunctionReader(lambda params, data: params['a'] + params['b'] + params['c'], None))
         pc.generate_pages('tmp3', RstWriter(), 'a', 'b')
 
         with open('tmp3/c.rst', 'r') as f:
@@ -208,25 +203,25 @@ c
             t_index = c.find('''
 .. table:: c = c1
 
-    +-----------+------+------+
-    |Row: A-NAME|b1    |b2    |
-    |Col: b     |      |      |
-    +-----------+------+------+
-    |a1         |a1b1c1|a1b2c1|
-    +-----------+------+------+
-    |a2         |a2b1c1|a2b2c1|
-    +-----------+------+------+
+    +------+------+------+
+    |Row: a|b1    |b2    |
+    |Col: b|      |      |
+    +------+------+------+
+    |a1    |a1b1c1|a1b2c1|
+    +------+------+------+
+    |a2    |a2b1c1|a2b2c1|
+    +------+------+------+
 
 .. table:: c = c2
 
-    +-----------+------+------+
-    |Row: A-NAME|b1    |b2    |
-    |Col: b     |      |      |
-    +-----------+------+------+
-    |a1         |a1b1c2|a1b2c2|
-    +-----------+------+------+
-    |a2         |a2b1c2|a2b2c2|
-    +-----------+------+------+
+    +------+------+------+
+    |Row: a|b1    |b2    |
+    |Col: b|      |      |
+    +------+------+------+
+    |a1    |a1b1c2|a1b2c2|
+    +------+------+------+
+    |a2    |a2b1c2|a2b2c2|
+    +------+------+------+
 
 
 ----
@@ -281,15 +276,12 @@ class TestRstWriter(unittest.TestCase):
                                    {('a1', 'b1'): 'a1b1',
                                     ('a1', 'b2'): 'a1b2',
                                     ('a2', 'b1'): 'a2b1',
-                                    ('a2', 'b2'): 'a2b2'},
-                                   {'a': 'A',
-                                    'b': 'B',
-                                    'c': 'C-NAME'})
-        self.assertNotEqual(table.find('.. table:: C-NAME = c_value'), -1)
+                                    ('a2', 'b2'): 'a2b2'})
+        self.assertNotEqual(table.find('.. table:: c = c_value'), -1)
         self.assertNotEqual(table.find('''
     +------+----+----+
-    |Row: A|b1  |b2  |
-    |Col: B|    |    |
+    |Row: a|b1  |b2  |
+    |Col: b|    |    |
     +------+----+----+
     |a1    |a1b1|a1b2|
     +------+----+----+

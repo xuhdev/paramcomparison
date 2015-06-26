@@ -30,11 +30,9 @@ class ParamComparison:
          values to be tried for the corresponding variable.
     :type reader: readers.Reader
     :param reader: The Reader class to load and process data.
-    :type readable_names: dict: str -> str
-    :param readable_names: A dictionary which maps names in grid keys to human readable names
     """
 
-    def __init__(self, grid, reader, readable_names = dict()):
+    def __init__(self, grid, reader):
 
         self.names = tuple(grid.keys())
         self.name_idx = dict() # reverse look up (name --> index)
@@ -46,13 +44,6 @@ class ParamComparison:
             self.grid[i[0]] = tuple(map(str, v))
 
         self.results = dict()
-
-        self.readable_names = copy.deepcopy(readable_names)
-
-        # For all names which don't have a human readable name, create a dummy one for them
-        for name in self.names:
-            if not name in self.readable_names:
-                self.readable_names[name] = name
 
         # store all results to a dictionary to be used for further looking up
         for params in itertools.product(*grid.values()):
@@ -111,8 +102,7 @@ class ParamComparison:
                 f.write(writer.write_title('main'))
                 f.write(writer.write_table(self.names, (None, None),
                                            row_field_idx, self.grid[row_field],
-                                           col_field_idx, self.grid[col_field], values,
-                                           self.readable_names))
+                                           col_field_idx, self.grid[col_field], values))
             return
 
         # i is the 3rd field
@@ -125,7 +115,7 @@ class ParamComparison:
             with open(prefix + writer.get_file_name(self.names[i]), 'w') as f:
 
                 # write title first
-                f.write(writer.write_title(self.readable_names[self.names[i]]))
+                f.write(writer.write_title(self.names[i]))
 
                 # subgrid with i, row_field_idx and col_field_idx removed
                 subgrid = copy.deepcopy(self.grid)
@@ -154,6 +144,6 @@ class ParamComparison:
                         f.write(writer.write_table(self.names, tuple(params),
                                                    row_field_idx, self.grid[row_field],
                                                    col_field_idx, self.grid[col_field],
-                                                   values, self.readable_names))
+                                                   values))
 
                     f.write(writer.write_separator())
