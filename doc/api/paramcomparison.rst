@@ -4,6 +4,14 @@ paramcomparison package
 Submodules
 ----------
 
+paramcomparison.readers module
+------------------------------
+
+.. automodule:: paramcomparison.readers
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 paramcomparison.writers module
 ------------------------------
 

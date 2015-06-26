@@ -25,13 +25,14 @@ The basic usage is simple:
 
     import paramcomparison
     from paramcomparison.writers import RstWriter
+    from paramcomparison.readers import UserFunctionReader
 
-    def f(a, b, c, d): # or other functions to compute the result
-        return a + b + c + d
+    def f(params, data): # or other functions to compute the result
+        return params['a'] + params['b'] + params['c'] + params['d']
 
     param_space = {'a': [1,2], 'b': [3,4], 'c':[5,6], 'd': [7,8]}
 
-    pc = paramcomparison.ParamComparison(param_space, f)
+    pc = paramcomparison.ParamComparison(param_space, UserFunctionReader(f, None))
     pc.generate_pages('output', RstWriter(), 'a', 'b')
 
 The directory output will contain some rst files which contains generated tables. You can use
