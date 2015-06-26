@@ -20,7 +20,7 @@ import sys
 if sys.version_info < (2, 7) or ((3, 0) <= sys.version_info < (3, 2)):
     raise SystemExit('Python version 2.7, or version 3.2 and above is required.')
 
-from distutils.core import setup
+from setuptools import setup
 import paramcomparison
 
 setup(name='ParamComparison',
