@@ -22,6 +22,8 @@ class Writer(object):
     The base class for all writers, which define how to write output in specific formats.
     """
 
+    __metaclass__ = abc.ABCMeta
+
     @abc.abstractmethod
     def get_file_name(self, name):
         """
@@ -31,7 +33,7 @@ class Writer(object):
         :return: the file name given the comparison parameter name
         :rtype: str
         """
-        return
+        pass
 
     @abc.abstractmethod
     def write_title(self, comparison_param):
@@ -42,7 +44,7 @@ class Writer(object):
         :return: the file title given the comparison parameter name
         :rtype: str
         """
-        return
+        pass
 
     @abc.abstractmethod
     def write_table(self, names, params, row_idx, row_values, col_idx, col_values,
@@ -71,7 +73,7 @@ class Writer(object):
         :rtype: str
         """
 
-        return
+        pass
 
     @abc.abstractmethod
     def write_separator(self):
@@ -79,7 +81,7 @@ class Writer(object):
         :return: the separator between two sets of tables.
         :rtype: str
         """
-        return
+        pass
 
 import os
 try:
