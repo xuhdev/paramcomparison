@@ -27,7 +27,9 @@ The basic usage is simple:
     from paramcomparison.writers import RstWriter
     from paramcomparison.readers import UserFunctionReader
 
-    def f(params, data): # or other functions to compute the result
+    # f can be any custom function. It can be a function which reads a data file, or computes on the
+    # fly.
+    def f(params, data):
         return params['a'] + params['b'] + params['c'] + params['d']
 
     param_space = {'a': [1,2], 'b': [3,4], 'c':[5,6], 'd': [7,8]}
