@@ -11,6 +11,7 @@ API Documentation
 
    api/modules
    examples/index
+   changelog
 
 
 Indices and tables
