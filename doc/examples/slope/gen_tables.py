@@ -22,5 +22,6 @@ def compute_sliding_time(params, data):
 param_space = {'theta': ('0.52', '1.05'), 'mu': ('0.1', '0.3', '1.0'),
                'g':('1.6', '3.7', '9.8'), 'h': ('1', '2', '3')}
 
-pc = paramcomparison.ParamComparison(param_space, UserFunctionReader(compute_sliding_time, None))
+pc = paramcomparison.ParamComparison(param_space,
+            UserFunctionReader(compute_sliding_time, None))
 pc.generate_pages('output', RstWriter(), 'theta', 'mu')

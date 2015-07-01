@@ -27,7 +27,6 @@ We create a python script to generate the tables using
 :class:`paramcomparison.readers.UserFunctionReader`:
 
 .. literalinclude:: gen_tables.py
-   :linenos:
 
 You can view the output of this example at :doc:`output/index`.
 
