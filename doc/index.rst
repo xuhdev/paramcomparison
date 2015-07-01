@@ -3,11 +3,11 @@ ParamComparison
 
 .. include:: ../README.rst
 
-API Documentation
-=================
+Documentation
+=============
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    api/modules
    examples/index

@@ -1,5 +1,5 @@
-Put an Object On a Slope
-========================
+Object on a Slope
+=================
 
 This is an example which will show the usage of :class:`paramcomparison.readers.UserFunctionReader`.
 

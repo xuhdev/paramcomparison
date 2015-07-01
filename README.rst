@@ -18,8 +18,8 @@ Or use pip:
 
     pip install ParamComparison
 
-Usage
------
+Basic Usage
+-----------
 The basic usage is simple:
 ::
 
