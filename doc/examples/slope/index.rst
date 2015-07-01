@@ -28,7 +28,8 @@ We create a python script to generate the tables using
 
 .. literalinclude:: gen_tables.py
 
-You can view the output of this example at :doc:`output/index`.
+You can download :download:`the script <gen_tables.py>` and view :doc:`the output of this example
+<output/index>`.
 
 Here we generated two pages. Each of the pages lists tables which include all the possible
 combinations, but the two pages order the tables in different ways: :doc:`the page g <output/g>`
