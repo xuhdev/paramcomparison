@@ -40,6 +40,8 @@ The basic usage is simple:
 The directory output will contain some rst files which contains generated tables. You can use
 `Sphinx`_, `Nikola`_ or other tools to further convert them into HTML, PDF and other formats.
 
+There are more examples available in the ``doc/examples`` folder.
+
 Source Code
 -----------
 

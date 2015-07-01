@@ -10,6 +10,7 @@ API Documentation
    :maxdepth: 2
 
    api/modules
+   examples/index
 
 
 Indices and tables
