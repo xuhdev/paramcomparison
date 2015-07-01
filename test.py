@@ -152,6 +152,11 @@ class TestParamComparison(unittest.TestCase):
             self.assertNotEqual(t_index, -1)
             self.assertLess(title_index, t_index)
 
+            # ---- should not end the file
+            last_separator_index = d.rfind('----')
+            last_plus_index = d.rfind('+')
+            self.assertLess(last_separator_index, last_plus_index)
+
     def test_generate_pages_2_params(self):
         """
         Test generate_pages when there are only2 parameters
@@ -222,9 +227,6 @@ c
     +------+------+------+
     |a2    |a2b1c2|a2b2c2|
     +------+------+------+
-
-
-----
             '''.strip())
 
             self.assertNotEqual(title_index, -1)

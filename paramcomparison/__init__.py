@@ -132,7 +132,10 @@ class ParamComparison:
 
                 # Iterate all fields except row_field and col_field. Field i is always iterated in
                 # the last level. List the tables of the row field and column field for them.
+                num_iterable = sum(1 for x in itertools.product(*subgrid.values()))
+                x_idx = 0
                 for x in itertools.product(*subgrid.values()):
+                    x_idx += 1
                     params = [None for j in range(len(self.names))]
                     subgrid_keys = tuple(subgrid.keys())
                     for j in range(len(subgrid_keys)):
@@ -154,4 +157,6 @@ class ParamComparison:
                                                    col_field_idx, self.grid[col_field],
                                                    values))
 
-                    f.write(writer.write_separator())
+                    # don't write the separator for the last section
+                    if x_idx < num_iterable:
+                        f.write(writer.write_separator())

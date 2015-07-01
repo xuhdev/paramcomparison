@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v0.2.2
+------
+
+- ``writers.RstWriter``: don't write separator at the end of each rst file.
+
 v0.2.1
 ------
 
