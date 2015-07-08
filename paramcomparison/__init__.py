@@ -79,7 +79,10 @@ class ParamComparison:
         if not isinstance(writer, Writer):
             raise TypeError('Invalid writer. Must be an instance of paramcomparison.writers.Writer')
 
-        os.mkdir(outdir)
+        try:
+            os.mkdir(outdir)
+        except:
+            pass
 
         prefix = outdir
         if prefix[-1] != os.path.sep:
