@@ -39,6 +39,9 @@ class TestParamComparison(unittest.TestCase):
         Test initialization
         """
 
+        # When a non-Reader instance is passed in, make sure TypeError is raised
+        self.assertRaises(TypeError, paramcomparison.ParamComparison, self.param_space, None)
+
         pc = self.pc
 
         # test names
@@ -65,6 +68,9 @@ class TestParamComparison(unittest.TestCase):
         """
         Test generate_pages function
         """
+
+        # When a non-Writer instance is passed in, make sure TypeError is raised
+        self.assertRaises(TypeError, self.pc.generate_pages, 'tmp', None, 'a', 'b')
 
         self.pc.generate_pages('tmp', RstWriter(), 'a', 'b')
 
