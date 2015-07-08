@@ -72,6 +72,14 @@ class TestParamComparison(unittest.TestCase):
         # When a non-Writer instance is passed in, make sure TypeError is raised
         self.assertRaises(TypeError, self.pc.generate_pages, 'tmp', None, 'a', 'b')
 
+        # Make sure when non-existent field is given we raise error
+        self.assertRaisesRegexp(ValueError, 'Field "non-existent-field" does not exist',
+                               self.pc.generate_pages,
+                               'tmp', RstWriter(), 'non-existent-field', 'b')
+        self.assertRaisesRegexp(ValueError, 'Field "non-existent-field" does not exist',
+                               self.pc.generate_pages,
+                               'tmp', RstWriter(), 'a', 'non-existent-field')
+
         self.pc.generate_pages('tmp', RstWriter(), 'a', 'b')
 
         with open('tmp/c.rst', 'r') as f:

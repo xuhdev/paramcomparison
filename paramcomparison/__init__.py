@@ -89,13 +89,13 @@ class ParamComparison:
             prefix += os.path.sep
 
         # the index of the row and column field
-        row_field_idx = self.names.index(row_field)
-        col_field_idx = self.names.index(col_field)
-
-        # make sure both row_field and col_field exist
-        if row_field_idx == -1:
+        try:
+            row_field_idx = self.names.index(row_field)
+        except ValueError:
             raise ValueError('Field "{}" does not exist'.format(row_field))
-        if col_field_idx == -1:
+        try:
+            col_field_idx = self.names.index(col_field)
+        except ValueError:
             raise ValueError('Field "{}" does not exist'.format(col_field))
 
         if len(self.names) == 2: # we only have 2 fields, just generate a table
