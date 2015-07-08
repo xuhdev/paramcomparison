@@ -31,6 +31,7 @@ class TestParamComparison(unittest.TestCase):
     def setUp(self):
         self.param_space = {'a': [1,2], 'b': [3,4], 'c':[5,6], 'd': [7,8,9]}
 
+        # the main object for testing
         self.pc = paramcomparison.ParamComparison(self.param_space, UserFunctionReader(f, None))
 
     def test_init(self):
