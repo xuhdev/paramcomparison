@@ -8,4 +8,10 @@ python:
   - "pypy"
   - "pypy3"
 
-script: python test.py
+install:
+  - pip install coveralls
+
+script: coverage run --source paramcomparison test.py
+
+after_success:
+  coveralls
