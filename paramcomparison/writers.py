@@ -33,7 +33,7 @@ class Writer(object):
         :return: The file name given the comparison parameter name
         :rtype: str
         """
-        pass
+        raise NotImplementedError
 
     @abc.abstractmethod
     def write_title(self, comparison_param):
@@ -44,7 +44,7 @@ class Writer(object):
         :return: The file title given the comparison parameter name
         :rtype: str
         """
-        pass
+        raise NotImplementedError
 
     @abc.abstractmethod
     def write_table(self, names, params, row_idx, row_values, col_idx, col_values,
@@ -70,8 +70,7 @@ class Writer(object):
         :return: The table string
         :rtype: str
         """
-
-        pass
+        raise NotImplementedError
 
     @abc.abstractmethod
     def write_separator(self):
@@ -79,7 +78,7 @@ class Writer(object):
         :return: The separator between two sets of tables.
         :rtype: str
         """
-        pass
+        raise NotImplementedError
 
 import os
 try:

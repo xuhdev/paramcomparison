@@ -33,7 +33,7 @@ class Reader(object):
         :return: The entry corresponding to the parameters.
         :rtype: str
         """
-        pass
+        raise NotImplementedError
 
 class UserFunctionReader(Reader):
     """
