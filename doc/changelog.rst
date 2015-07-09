@@ -5,6 +5,7 @@ v0.2.2
 ------
 
 - ``writers.RstWriter``: don't write separator at the end of each rst file.
+- Abstract classes are now implemented in a way which are compatible with both Python 2 and 3.
 
 v0.2.1
 ------

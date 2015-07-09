@@ -16,13 +16,13 @@
 from __future__ import print_function
 
 import abc
+import six
 
+@six.add_metaclass(abc.ABCMeta)
 class Reader(object):
     """
     The base class for all readers, which define how to read and process data.
     """
-
-    __metaclass__ = abc.ABCMeta
 
     @abc.abstractmethod
     def read(self, params):

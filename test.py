@@ -333,5 +333,15 @@ class TestRstWriter(unittest.TestCase):
 
         self.assertNotEqual(self.w.write_separator().find('----'), -1)
 
+class TestReader(unittest.TestCase):
+    def test_abstract(self):
+        from paramcomparison.readers import Reader
+        self.assertRaises(TypeError, Reader)
+
+class TestWriter(unittest.TestCase):
+    def test_abstract(self):
+        from paramcomparison.writers import Writer
+        self.assertRaises(TypeError, Writer)
+
 if __name__ == '__main__':
     unittest.main()

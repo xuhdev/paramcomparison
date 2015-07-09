@@ -23,6 +23,9 @@ if sys.version_info < (2, 7) or ((3, 0) <= sys.version_info < (3, 2)):
 from setuptools import setup
 import paramcomparison
 
+with open('requirements.txt') as f:
+    required = f.read().splitlines()
+
 setup(name='ParamComparison',
       version=paramcomparison.__version__,
       description='Parameter Comparison Table Generator',
@@ -31,5 +34,6 @@ setup(name='ParamComparison',
       author_email='hong@topbug.net',
       url='http://paramcomp.topbug.net',
       packages=['paramcomparison'],
-      license='LGPLv3+'
+      license='LGPLv3+',
+      install_requires = required
      )

@@ -16,13 +16,13 @@
 from __future__ import print_function
 
 import abc
+import six
 
+@six.add_metaclass(abc.ABCMeta)
 class Writer(object):
     """
     The base class for all writers, which define how to write output in specific formats.
     """
-
-    __metaclass__ = abc.ABCMeta
 
     @abc.abstractmethod
     def get_file_name(self, name):
